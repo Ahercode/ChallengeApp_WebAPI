@@ -36,4 +36,13 @@ public class UserService {
             return false;
         }
     }
+
+    public User getUserById(Long id) {
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

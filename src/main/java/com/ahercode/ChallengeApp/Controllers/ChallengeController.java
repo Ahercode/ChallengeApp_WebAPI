@@ -4,7 +4,6 @@ import com.ahercode.ChallengeApp.Models.Challenge;
 import com.ahercode.ChallengeApp.Services.ChallengeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 
@@ -18,19 +17,20 @@ public class ChallengeController {
 
     }
 
-
     @GetMapping("/challenges")
-    public List<Challenge> getChallenges() {
-        return _challengeService.getChallenges();
+    public ResponseEntity<List<Challenge>> getChallenges() {
+//        return _challengeService.getChallenges();
+        return ResponseEntity.ok(_challengeService.getChallenges());
     }
 
     @PostMapping("/challenges")
-    public String addChallenge(@RequestBody  Challenge challenge) {
-        if (_challengeService.addChallenge(challenge))
-            return "Challenge added successfully";
-        else
-            return "Failed to add a new challenge";
+    public ResponseEntity<String> addChallenge(@RequestBody  Challenge challenge) {
 
+        boolean isAdded = _challengeService.addChallenge(challenge);
+        if (isAdded)
+            return ResponseEntity.ok("Challenge added successfully");
+        else
+            return ResponseEntity.badRequest().body("Failed to add a new challenge");
     }
 
     @GetMapping("/challenges/{id}")
@@ -42,6 +42,18 @@ public class ChallengeController {
         }
         else
             return ResponseEntity.ok(challenge);
+    }
+
+
+    @PutMapping("/challenges")
+    public ResponseEntity<String> updateChallenge(Long id,  Challenge updatedChallenge) {
+
+        boolean isUpdated = _challengeService.updateChallenge(id, updatedChallenge);
+
+        if (isUpdated)
+            return ResponseEntity.ok("Challenge updated successfully");
+        else
+            return ResponseEntity.badRequest().body("Failed to update challenge");
     }
 
 }
