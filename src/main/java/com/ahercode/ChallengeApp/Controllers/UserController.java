@@ -24,8 +24,8 @@ public class UserController {
     @PostMapping("/users")
     public String addUser(@RequestBody User user) {
         if (_userService.addUser(user))
-            return "User added";
+            return "User added successfully";
         else
-            return "User not added";
+            return "Failed to add a new user";
     }
 }

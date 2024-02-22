@@ -2,10 +2,7 @@ package com.ahercode.ChallengeApp.Controllers;
 
 import com.ahercode.ChallengeApp.Models.Challenge;
 import com.ahercode.ChallengeApp.Services.ChallengeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,10 +26,21 @@ public class ChallengeController {
     @PostMapping("/challenges")
     public String addChallenge(@RequestBody  Challenge challenge) {
         if (_challengeService.addChallenge(challenge))
-            return "Challenge added";
+            return "Challenge added successfully";
         else
-            return "Challenge not added";
+            return "Failed to add a new challenge";
 
+    }
+
+    @GetMapping("/challenges/{id}")
+    public Challenge getChallenge(@PathVariable Long id) {
+        Challenge challenge = _challengeService.getChallenge(id);
+
+        if(challenge == null) {
+            throw new RuntimeException("Challenge not found");
+        }
+        else
+            return challenge;
     }
 
 }
