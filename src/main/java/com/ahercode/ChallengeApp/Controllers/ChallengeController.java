@@ -8,6 +8,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/api/v1/challenges")
 public class ChallengeController {
 
     private final ChallengeService _challengeService;
@@ -17,13 +18,13 @@ public class ChallengeController {
 
     }
 
-    @GetMapping("/challenges")
+    @GetMapping
     public ResponseEntity<List<Challenge>> getChallenges() {
 //        return _challengeService.getChallenges();
         return ResponseEntity.ok(_challengeService.getChallenges());
     }
 
-    @PostMapping("/challenges")
+    @PostMapping
     public ResponseEntity<String> addChallenge(@RequestBody  Challenge challenge) {
 
         boolean isAdded = _challengeService.addChallenge(challenge);
@@ -33,7 +34,7 @@ public class ChallengeController {
             return ResponseEntity.badRequest().body("Failed to add a new challenge");
     }
 
-    @GetMapping("/challenges/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Challenge> getChallenge(@PathVariable Long id) {
         Challenge challenge = _challengeService.getChallenge(id);
 
@@ -45,7 +46,7 @@ public class ChallengeController {
     }
 
 
-    @PutMapping("/challenges/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateChallenge(@PathVariable Long id, @RequestBody Challenge updatedChallenge) {
 
         boolean isUpdated = _challengeService.updateChallenge(id, updatedChallenge);
@@ -56,7 +57,7 @@ public class ChallengeController {
             return ResponseEntity.badRequest().body("Failed to update challenge");
     }
 
-    @DeleteMapping("/challenges/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteChallenge(@PathVariable Long id) {
         boolean isDeleted = _challengeService.deleteChallenge(id);
 

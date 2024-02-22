@@ -50,6 +50,7 @@ public class UserService {
         for (User user : users) {
             if (user.getId().equals(id)) {
                 user.setId(updatedUser.getId());
+                user.setName(updatedUser.getName());
                 user.setEmail(updatedUser.getEmail());
                 user.setPassword(updatedUser.getPassword());
                 user.setRole(updatedUser.getRole());
