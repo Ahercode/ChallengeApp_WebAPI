@@ -10,10 +10,10 @@ import java.util.List;
 
 @Service
 public class UserService {
-//    list of users
     private List<User> users = new ArrayList<>();
 
-//    iinitialize the list of users
+
+//    Added a some dummy data to the users list
     public UserService() {
         users.add(new User(1L, "admin", "admiin@gmail.com", "admin", "admin"));
         users.add(new User(2L, "user", "user@gmail..com", "user", "user"));
