@@ -38,7 +38,7 @@ public class ChallengeController {
         Challenge challenge = _challengeService.getChallenge(id);
 
         if(challenge == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().header("Challenge", "Challenge not found").build();
         }
         else
             return ResponseEntity.ok(challenge);

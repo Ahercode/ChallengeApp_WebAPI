@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserService _userService;
@@ -14,13 +15,13 @@ public class UserController {
         _userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<User>> getUsers() {
 //        return _userService.getUsers();
         return ResponseEntity.ok(_userService.getUsers());
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<String> addUser(@RequestBody User user) {
 
         if (_userService.addUser(user))
@@ -29,12 +30,28 @@ public class UserController {
             return ResponseEntity.badRequest().body("Failed to add a new user");
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = _userService.getUserById(id);
         if (user != null)
             return ResponseEntity.ok(user);
         else
             return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        if (_userService.updateUser(id, updatedUser))
+            return ResponseEntity.ok("User updated successfully");
+        else
+            return ResponseEntity.badRequest().body("Failed to update user");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        if (_userService.deleteUser(id))
+            return ResponseEntity.ok("User deleted successfully");
+        else
+            return ResponseEntity.badRequest().body("Failed to delete user");
     }
 }

@@ -45,4 +45,27 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean updateUser(Long id, User updatedUser) {
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                user.setId(updatedUser.getId());
+                user.setEmail(updatedUser.getEmail());
+                user.setPassword(updatedUser.getPassword());
+                user.setRole(updatedUser.getRole());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteUser(Long id) {
+        for (User user : users) {
+            if (user.getId().equals(id)) {
+                users.remove(user);
+                return true;
+            }
+        }
+        return false;
+    }
 }
