@@ -2,6 +2,7 @@ package com.ahercode.ChallengeApp.Controllers;
 
 import com.ahercode.ChallengeApp.Models.Challenge;
 import com.ahercode.ChallengeApp.Services.ChallengeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,14 +34,14 @@ public class ChallengeController {
     }
 
     @GetMapping("/challenges/{id}")
-    public Challenge getChallenge(@PathVariable Long id) {
+    public ResponseEntity<Challenge> getChallenge(@PathVariable Long id) {
         Challenge challenge = _challengeService.getChallenge(id);
 
         if(challenge == null) {
-            throw new RuntimeException("Challenge not found");
+            return ResponseEntity.notFound().build();
         }
         else
-            return challenge;
+            return ResponseEntity.ok(challenge);
     }
 
 }

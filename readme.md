@@ -26,15 +26,12 @@ I built it using `Spring boot java framework`.
 - [x] Dockerizing the application
 - [x] Documenting the API using Swagger
 - [x] Using H2 in-memory database
-- [x] Using JPA and Hibernate
-- [x] Using Lombok
-- [x] Using Mockito
 - [x] Using Postman
-- [x] Using Git and GitHub
 - [x] Using Maven
 - [x] Using Docker-compose
 - [x] Using Spring Boot
 - [x] Using Java
+- [x] Use ResponseEntity for HTTP responses
 
 ## How to run the application
 1. Clone the repository
