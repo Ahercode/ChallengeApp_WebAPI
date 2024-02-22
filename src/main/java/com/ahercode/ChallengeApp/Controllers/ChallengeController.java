@@ -45,8 +45,8 @@ public class ChallengeController {
     }
 
 
-    @PutMapping("/challenges")
-    public ResponseEntity<String> updateChallenge(Long id,  Challenge updatedChallenge) {
+    @PutMapping("/challenges/{id}")
+    public ResponseEntity<String> updateChallenge(@PathVariable Long id, @RequestBody Challenge updatedChallenge) {
 
         boolean isUpdated = _challengeService.updateChallenge(id, updatedChallenge);
 
@@ -54,6 +54,16 @@ public class ChallengeController {
             return ResponseEntity.ok("Challenge updated successfully");
         else
             return ResponseEntity.badRequest().body("Failed to update challenge");
+    }
+
+    @DeleteMapping("/challenges/{id}")
+    public ResponseEntity<String> deleteChallenge(@PathVariable Long id) {
+        boolean isDeleted = _challengeService.deleteChallenge(id);
+
+        if (isDeleted)
+            return ResponseEntity.ok("Challenge deleted successfully");
+        else
+            return ResponseEntity.badRequest().body("Failed to delete challenge");
     }
 
 }
